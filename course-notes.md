@@ -166,5 +166,15 @@ A sample workflow to demonstrate this would be:
 - `terraform apply` to refresh the containers and accept the new image
   configured in an earlier step
 
+## Terraform Console and Output
+
+`terraform show` lists all the deployed objects and their attributes
+
+To test the interpolation of an object's attribute, use `terraform console`.
+The Terraform Console is an interactive way of testing the interpolation of
+items in an inventory.  I'm thinking of it as either a due diligence step
+when in doubt about the format of something that needs to be interpolated as
+well as a good debugging tool.
+
 
 
