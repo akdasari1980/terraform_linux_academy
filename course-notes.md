@@ -106,3 +106,65 @@ So, the four commands are:
 - `terraform show` - Lists all the artifacts that resulted from `terraform` 
   `apply`
 
+## Interpolation Notes
+
+Reference the official Terraform docs for more specific information.  This could
+be considered some side homework to reference but it also lists built-in
+functions that can be used in a manifest:
+
+https://www.terraform.io/docs/configuration/interpolation.html
+
+This is used to explain how variables are used in the `main.tf`.  Here's the
+snippet:
+
+```plaintext
+image = "${docker_image.la_docker_image.latest}"
+```
+
+In the above, the value for `docker_image.la_docker_image.latest` can be shown
+using `terraform show`:
+
+```plaintext
+docker_image.la_docker_image:
+  id = sha256:7d38940f80950d104de4dfb4ed60259e20ba00c13803800700099b1de9e3a06bghost:latest
+  latest = sha256:7d38940f80950d104de4dfb4ed60259e20ba00c13803800700099b1de9e3a06b
+  name = ghost:latest
+```
+
+The above value is derived from the namespace of that Terraform object
+`docker_image.la_docker_image`'s property of `latest`.  That is reflected when
+doing a `terraform show` after doing an apply action and it succeeding:
+
+```plaintext
+[...]
+docker_container.la_docker_container:
+[...]
+  image = sha256:7d38940f80950d104de4dfb4ed60259e20ba00c13803800700099b1de9e3a06b
+[...]
+```
+
+Finally, the `terraform destroy` command is introduced to demonstrate the
+teardown of an environment based on the objects Terraform is managing.
+
+## Tainting and Updating Resources
+
+`terraform taint <resourceId>` will force a resource to be refreshed when the next
+`terraform apply` is executed against the manifest *only if the resource
+requires a refreshed resource to stay compliant with the manifest*
+
+`terraform untaint <resourceId>` will undo the resource marked for a forced
+change
+
+A sample workflow to demonstrate this would be:
+
+- Run sample `main.tf` to build container with first image
+- Change image to a different image; Run `terraform plan` to see it reference
+  the asset be upgraded in-place
+- Image is updated in-place; Container built in previous `apply` does not take
+  new image; `terraform taint <resourceId>` to point at the container(s) to be
+  refreshed
+- `terraform apply` to refresh the containers and accept the new image
+  configured in an earlier step
+
+
+
