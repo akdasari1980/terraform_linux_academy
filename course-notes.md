@@ -350,3 +350,135 @@ index 6961112..d3f5a12 100755
 +^M
 ```
 
+## The Root Module
+
+The root module ends up acting as the binder for the modules that exist as
+child folders.
+
+We learn that using the interpolation syntax, we now use the `module.` inside
+of the curly braces to reference `outputs` from the module.
+
+Here's the new `main.tf` in the root:
+
+```terraform
+# Download the latest Ghost image
+module "image" {
+    source = "./image"
+    image = "${var.image}"
+}
+
+# Start the Container
+
+module "container" {
+    source = "./container"
+    image = "${module.image.image_out}"
+    container_name = "${var.container_name}"
+    container_port_internal = "${var.container_port_internal}"
+    container_port_external = "${var.container_port_external}"
+}
+```
+
+The above shows the transpositioning of values between modules.  The variables
+defined in the modules are the attributes that need to be populated in `main.tf`
+
+The `variables.tf` in the root will be the central point of management of values
+for the project while the `variables.tf` in 
+
+I'm shortcutting some of the finer detail because a lot of these patterns were
+learned from using Puppet.
+
+For completeness, the diff of the project will reflect all of the changes made
+to show the transition from `main.tf` monolith to a modularized implementation.
+
+```diff
+:~/gitroot/terraform_linux_academy$ git diff --cached
+diff --git a/container/variables.tf b/container/variables.tf
+index 0dff3e8..8dc51ac 100644
+--- a/container/variables.tf
++++ b/container/variables.tf
+@@ -1,15 +1,4 @@
+-variable "image" {
+-    description = "name for container"
+-}
+-
+-variable "container_name" {
+-    description = "name for container"
+-}
+-
+-variable "container_port_internal" {
+-    description = "container port mapping"
+-}
+-
+-variable "container_port_external" {
+-    description = "host port mapping to container port"
+-}
+\ No newline at end of file
++variable "image" {}
++variable "container_name" {}
++variable "container_port_internal" {}
++variable "container_port_external" {}
+diff --git a/main.tf b/main.tf
+index d3f5a12..9367690 100755
+--- a/main.tf
++++ b/main.tf
+@@ -1 +1,15 @@
++# Download the latest Ghost image^M
++module "image" {^M
++    source = "./image"^M
++    image = "${var.image}"^M
++}^M
+ 
++# Start the Container^M
++^M
++module "container" {^M
++    source = "./container"^M
++    image = "${module.image.image_out}"^M
++    container_name = "${var.container_name}"^M
++    container_port_internal = "${var.container_port_internal}"^M
++    container_port_external = "${var.container_port_external}"^M
++}
+\ No newline at end of file
+diff --git a/outputs.tf b/outputs.tf
+index d33dc15..5bd0997 100644
+--- a/outputs.tf
++++ b/outputs.tf
+@@ -1,8 +1,8 @@
+ # Output the IP Address of the Container
+ output "IP Address" {
+-    value = "${docker_container.la_docker_container.ip_address}"
++    value = "${module.container.ipv4_addr}"
+ }
+ 
+-output "Container Name" {
+-    value = "${docker_container.la_docker_container.name}"
+-}
++output "container_name" {
++    value = "${module.container.container_name}"
++}
+\ No newline at end of file
+diff --git a/variables.tf b/variables.tf
+index 4ec7a3f..0dff3e8 100644
+--- a/variables.tf
++++ b/variables.tf
+@@ -1,14 +1,15 @@
++variable "image" {
++    description = "name for container"
++}
++
+ variable "container_name" {
+     description = "name for container"
+-    default = "blog"
+ }
+ 
+ variable "container_port_internal" {
+     description = "container port mapping"
+-    default = "2368"
+ }
+ 
+ variable "container_port_external" {
+     description = "host port mapping to container port"
+-    default = "80"
+-}
++}
+\ No newline at end of file
+```

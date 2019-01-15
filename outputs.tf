@@ -1,8 +1,8 @@
 # Output the IP Address of the Container
 output "IP Address" {
-    value = "${docker_container.la_docker_container.ip_address}"
+    value = "${module.container.ipv4_addr}"
 }
 
-output "Container Name" {
-    value = "${docker_container.la_docker_container.name}"
+output "container_name" {
+    value = "${module.container.container_name}"
 }
