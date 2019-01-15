@@ -237,3 +237,43 @@ similar to this:
 └── variables.tf
 ```
 
+## The Image Module
+
+This exercise consisted of moving the `image` resources out of `main.tf` and
+into its own module.  Within the module, you'll need to also do a 
+`terraform init` to prepare the module with the appropriate resources.
+
+Here's the diff output from git demonstrating the components of the image module
+and the contents that were added:
+
+```diff
+:~/gitroot/terraform_linux_academy$ git diff --cached
+diff --git a/image/main.tf b/image/main.tf
+index e69de29..2fa8fe3 100644
+--- a/image/main.tf
++++ b/image/main.tf
+@@ -0,0 +1,4 @@
++# Download the latest Ghost image
++resource "docker_image" "la_docker_image" {
++    name = "${var.image}"
++}
+diff --git a/image/outputs.tf b/image/outputs.tf
+index e69de29..3499f27 100644
+--- a/image/outputs.tf
++++ b/image/outputs.tf
+@@ -0,0 +1,3 @@
++output "image_out" {
++    value = "${docker_image.la_docker_image.latest}"
++}
+\ No newline at end of file
+diff --git a/image/variables.tf b/image/variables.tf
+index e69de29..37e2ce0 100644
+--- a/image/variables.tf
++++ b/image/variables.tf
+@@ -0,0 +1,3 @@
++variable "image" {
++    description = "image for container"
++}
+\ No newline at end of file
+```
+

@@ -1,8 +1,3 @@
-# Download the latest Ghost image
-resource "docker_image" "la_docker_image" {
-    name = "${var.image}"
-}
-
 # Start the Container
 resource "docker_container" "la_docker_container" {
     name = "${var.container_name}"
