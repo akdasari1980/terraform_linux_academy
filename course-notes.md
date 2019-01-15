@@ -277,3 +277,76 @@ index e69de29..37e2ce0 100644
 \ No newline at end of file
 ```
 
+## The Container Module
+
+This module is the same as the `image` module.  The diff of the project will
+be placed into the notes as a reference:
+
+```diff
+:~/gitroot/terraform_linux_academy$ git diff --cached
+diff --git a/container/main.tf b/container/main.tf
+index e69de29..7990bb5 100644
+--- a/container/main.tf
++++ b/container/main.tf
+@@ -0,0 +1,9 @@
++# Start the Container
++resource "docker_container" "la_docker_container" {
++    name = "${var.container_name}"
++    image = "${var.image}"
++    ports {
++        internal = "${var.container_port_internal}"
++        external = "${var.container_port_external}"
++    }
++}
+\ No newline at end of file
+diff --git a/container/outputs.tf b/container/outputs.tf
+index e69de29..093e592 100644
+--- a/container/outputs.tf
++++ b/container/outputs.tf
+@@ -0,0 +1,8 @@
++# Output the IP Address of the Container
++output "ipv4_addr" {
++    value = "${docker_container.la_docker_container.ip_address}"
++}
++
++output "container_name" {
++    value = "${docker_container.la_docker_container.name}"
++}
+diff --git a/container/variables.tf b/container/variables.tf
+index e69de29..0dff3e8 100644
+--- a/container/variables.tf
++++ b/container/variables.tf
+@@ -0,0 +1,15 @@
++variable "image" {
++    description = "name for container"
++}
++
++variable "container_name" {
++    description = "name for container"
++}
++
++variable "container_port_internal" {
++    description = "container port mapping"
++}
++
++variable "container_port_external" {
++    description = "host port mapping to container port"
++}
+\ No newline at end of file
+diff --git a/main.tf b/main.tf
+index 6961112..d3f5a12 100755
+--- a/main.tf
++++ b/main.tf
+@@ -1,9 +1 @@
+-# Start the Container
+-resource "docker_container" "la_docker_container" {
+-    name = "${var.container_name}"
+-    image = "${docker_image.la_docker_image.latest}"
+-    ports {
+-        internal = "${var.container_port_internal}"
+-        external = "${var.container_port_external}"
+-    }
+-}
++^M
+```
+
