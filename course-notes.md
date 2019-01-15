@@ -176,5 +176,32 @@ items in an inventory.  I'm thinking of it as either a due diligence step
 when in doubt about the format of something that needs to be interpolated as
 well as a good debugging tool.
 
+## Terraform Variables
+
+**NOTE**: Please reference the Terraform docs for more thorough information
+on Terraform variables
+
+The syntax for a variable in a `.tf.` file is as follows:
+
+```terraform
+variable "image" {
+    description = "image for container"
+}
+```
+
+The above syntax does not have any value(s) assigned to the variable beyond a
+description so when a `terraform apply` is ran, it will prompt a use for a value
+at runtime:
+
+```plaintext
+:~/gitroot/terraform_linux_academy$ terraform apply
+var.image
+  image for container
+
+  Enter a value: 
+```
+
+Specifying `default` inside of the variable resource will fill the variable with
+a value if another one is not provided at runtime.
 
 
