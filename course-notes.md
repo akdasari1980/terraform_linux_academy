@@ -215,3 +215,25 @@ and outputs sections moved into their own discreet `.tf` files in the project.
 When you run a `terraform apply` after that, it still runs the same way it
 would if it was the original `main.tf` monolith but except now it's in a more
 manageable fashion.
+
+## Introduction to Modules
+
+This introduces the idea of breaking out a Terraform project into modules to
+make the assets more manageable.  The resultant base structure would look
+similar to this:
+
+```plaintext
+.
+├── container
+│   ├── main.tf
+│   ├── outputs.tf
+│   └── variables.tf
+├── image
+│   ├── main.tf
+│   ├── outputs.tf
+│   └── variables.tf
+├── main.tf
+├── outputs.tf
+└── variables.tf
+```
+
