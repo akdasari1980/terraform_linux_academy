@@ -204,4 +204,14 @@ var.image
 Specifying `default` inside of the variable resource will fill the variable with
 a value if another one is not provided at runtime.
 
+## Breaking Out Our Variables and Outputs
 
+Any file with the `.tf` suffix will be used by Terraform when running a
+`terraform apply`.
+
+As part of this exercise, the original `main.tf` file will have its variables
+and outputs sections moved into their own discreet `.tf` files in the project.
+
+When you run a `terraform apply` after that, it still runs the same way it
+would if it was the original `main.tf` monolith but except now it's in a more
+manageable fashion.
