@@ -526,3 +526,25 @@ official docs here:
 
 https://www.terraform.io/docs/configuration/environment-variables.html
 
+## Terraform Workspaces
+
+Much like in Python with `virtualenv`, Terraform has the concept of workspaces
+that allow for multiple environments to be deployed in the same Terraform
+folder.
+
+This is done by tracking states unique to each workspace.
+
+The following is a quick list of commands to manage workspaces:
+
+- `terraform workspace new [name]` - Creates a new workspace with the specified
+  name
+- `terraform workspace select [name]` - Changes the current workspace to the
+  specified name
+  - `default` is the name of the default workspace
+- `terraform workspace list` - Lists all the current workspaces in the Terraform
+  folder
+- `terraform workspace delete [name]` - Deletes the named workspace
+
+
+
+
