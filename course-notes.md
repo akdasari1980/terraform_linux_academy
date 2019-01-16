@@ -482,3 +482,47 @@ index 4ec7a3f..0dff3e8 100644
 +}
 \ No newline at end of file
 ```
+
+## Maps and Lookups
+
+Maps is a synonym to a dictionary (key/value pair[s])
+
+Lesson introduces a few things:
+
+- The syntax of a map declaration in `variables.tf` would look something like
+  this:
+
+```teraform
+variable "image" {
+    description = "image for container"
+    type = "map"
+    default = {
+        dev = "ghost:latest"
+        prod = "ghost:alpine"
+    }
+}
+```
+
+Note that it's still a `variable` resource but the type has been changed to be
+a map.  The default values with the curly braces are the values that are selected
+dependent upon the key that is passed to the map.
+
+The syntax to look up a map is:
+
+```terraform
+${lookup(var.input, var.mapToLookup)}
+```
+
+The `lookup()` method takes an input for a key in the first parameter and then
+the map to look into in the second parameter.
+
+The end of the lesson brings up a suggestion on how to troubleshoot any
+Terraform issues you may encounter by defining a `TF_VAR_[variableName]` in the
+system's environment variables.  Then, use `terraform console` after the var(s)
+you're looking to troubleshoot are set.
+
+More information about environment variables for Terraform can be found in the
+official docs here:
+
+https://www.terraform.io/docs/configuration/environment-variables.html
+
