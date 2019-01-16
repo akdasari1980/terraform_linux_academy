@@ -545,6 +545,22 @@ The following is a quick list of commands to manage workspaces:
   folder
 - `terraform workspace delete [name]` - Deletes the named workspace
 
+## Breaking Out Our Variable Definitions
+
+This introduces the `variables.tfvars` file.  This file allows for sensitive
+information to live in a separate file that doesn't have to be shared with the
+project while not impacting project reuse or repurposing.
+
+This requires the following for a project that already has values assigned in a
+`variables.tf` file:
+
+1. Create the `variables.tfvars` file
+2. If applicable, remove any `default` values from variables in the list
+  1. Those will likely need to be copied out to put into the next step
+3. Enter the values removed from `variables.tf` into `variables.tfvars`
+  1. Ensure that the format for the input values for the variable type defined
+     in `variables.tf` match the format entered into `variables.tfvars`
+4. For security, add a line in `.gitignore` to not version any `.tfvars` file
 
 
 
