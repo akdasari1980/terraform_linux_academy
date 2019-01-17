@@ -13,3 +13,9 @@ module "container" {
     container_port_internal = "${var.container_port_internal}"
     container_port_external = "${lookup(var.container_port_external, var.env)}"
 }
+
+resource "null_resource" "null_id" {
+    provisioner "local-exec" {
+        command = "echo ${module.container.container_name}:${module.container.ipv4_addr} >> container.txt"
+    }
+}

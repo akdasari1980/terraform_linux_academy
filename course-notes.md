@@ -562,5 +562,24 @@ This requires the following for a project that already has values assigned in a
      in `variables.tf` match the format entered into `variables.tfvars`
 4. For security, add a line in `.gitignore` to not version any `.tfvars` file
 
+## Null Resources and Local-Exec
 
+Null Resources allow for scripts to be ran against an environment without having
+to redeploy anything.
+
+`null_resource` is a resource type in a `.tf` file.
+
+This lesson also introduces the `provisioner` keyword for a `.tf` file and this
+lesson uses `local-exec` to run local commands on the system Terraform is being
+executed from.
+
+More information on the `null_resource` and other `provisioner` types can be
+found in the official docs:
+
+Providers will have resources associated with them.  For all of these lessons so
+far, we've been using the `docker` provider.  Below is the config for resources
+and provisioners:
+
+Resources: https://www.terraform.io/docs/configuration/resources.html
+Provisioners: https://www.terraform.io/docs/provisioners/index.html
 
