@@ -583,3 +583,8 @@ and provisioners:
 Resources: https://www.terraform.io/docs/configuration/resources.html
 Provisioners: https://www.terraform.io/docs/provisioners/index.html
 
+## AWS and Cloud9 Setup
+
+This just ran through setting up an environment in Cloud9 for later lessons.
+No learning materials for Terraform were reviewed here
+
