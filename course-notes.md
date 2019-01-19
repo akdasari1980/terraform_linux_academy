@@ -598,3 +598,40 @@ process as if you were installing it on premise.
   - It should just be a single binary file
 - Run `terraform` from the shell to spot check its availability in the shell
 
+## What We're Going to Deploy
+
+The infrastructure to be deployed will be:
+
+- 2 Availability Zones; In each AZ
+  - A web server will be deployed; It will echo its subnet out onto its page
+- Route tables
+  - One public
+  - One private
+- An S3 bucket
+
+The github repo that these notes have been kept in now includes a `cloud9-env`
+folder.  Here's the file and folder hierarchy:
+
+```plaintext
+:~/environment/terraform_linux_academy/cloud9-env (master) $ tree
+.
+├── compute
+│   ├── main.tf
+│   ├── outputs.tf
+│   ├── userdata.tpl
+│   └── variables.tf
+├── main.tf
+├── networking
+│   ├── main.tf
+│   ├── outputs.tf
+│   └── variables.tf
+├── outputs.tf
+├── storage
+│   ├── main.tf
+│   ├── outputs.tf
+│   └── variables.tf
+└── variables.tf
+```
+
+The `userdata.tpl` file in the `compute` folder is a template file we'll learn
+to utilize later on.
