@@ -588,3 +588,13 @@ Provisioners: https://www.terraform.io/docs/provisioners/index.html
 This just ran through setting up an environment in Cloud9 for later lessons.
 No learning materials for Terraform were reviewed here
 
+## Terraform Installation on Cloud9
+
+Just goes over installing Terraform in the Cloud9 environment.  It's the same
+process as if you were installing it on premise.
+
+- Download the zip file
+- Unpack the zip file to `/usr/local/bin/`
+  - It should just be a single binary file
+- Run `terraform` from the shell to spot check its availability in the shell
+
