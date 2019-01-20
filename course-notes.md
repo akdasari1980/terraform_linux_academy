@@ -652,3 +652,10 @@ module.  We did a `terraform destroy` on the standalone `storage` deployment to
 to confirm the redeployment of the storage module from the root so that the
 state may be tracked there.
 
+## Networking Part 1: VPC, IGW, Route Tables
+
+This lesson built the `networking` module.  It created a VPC and Internet
+Gateway resource and two route tables.  The `variables.tf` file does have a
+default value for the private subnet specified within the module.
+
+This will likely be removed in the subsequent sections.
