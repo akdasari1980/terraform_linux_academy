@@ -17,3 +17,15 @@ module "networking" {
     public_cidrs = "${var.public_cidrs}"
     accessip = "${var.accessip}"
 }
+
+# Deploy Compute Resources
+module "compute" {
+    source = "./compute"
+    key_name = "${var.key_name}"
+    public_key_path = "${var.public_key_path}"
+    instance_count = "${var.instance_count}"
+    instance_type = "${var.instance_type}"
+    security_group = "${module.networking.public_sg}"
+    subnets = "${module.networking.public_subnets}"
+    subnet_ips = "${module.networking.subnet_ips}"
+}

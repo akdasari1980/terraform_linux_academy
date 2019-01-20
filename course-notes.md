@@ -717,3 +717,10 @@ as well to prepare for Part 4 when this is rolled into the root module.
 Please review `compute/main.tf` and `userdata.tpl` in the `cloud9-env` folder
 for more details.
 
+## Compute Part 4: The Root Module
+
+Everything has been stitched into the root module in the same way it was with
+`storage` and `networking`.
+
+We fucking did it.  Woot!
+
