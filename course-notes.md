@@ -704,3 +704,16 @@ This started to run through the required parameters for an `aws_instance`
 resource but stopped short at the `user_data` parameter since that will be
 covered in the next section.
 
+## Compute Part 3: User Data and Template Files
+
+Template files were demonstrated here to help make multiple `user_data` entries
+be unique to each instance being deployed.  That is done by adding variables
+into the `.tpl` file and then rendering the value in the template before the
+content is passed onto the resource for use.
+
+All the default variable values in the `compute` module have been removed
+as well to prepare for Part 4 when this is rolled into the root module.
+
+Please review `compute/main.tf` and `userdata.tpl` in the `cloud9-env` folder
+for more details.
+
