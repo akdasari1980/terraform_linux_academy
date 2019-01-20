@@ -644,3 +644,11 @@ notes will likely be added as comments into the `.tf` files themselves.
 For this section, the `storage` module was started and introduced some new
 resources.  Direct links to the documentation for those resources have been
 added to the module's source code via comments.
+
+## Storage Part 2: Root Module Files
+
+This lesson focused on bringing the storage module's resources into the root
+module.  We did a `terraform destroy` on the standalone `storage` deployment to
+to confirm the redeployment of the storage module from the root so that the
+state may be tracked there.
+
