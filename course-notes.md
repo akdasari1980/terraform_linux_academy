@@ -698,3 +698,9 @@ file name that would be in `~/.ssh/` but instead a custom key was made for the
 lab since the default key names are being used to sync these notes back to 
 github.
 
+## Compute Part 2: The EC2 Instance
+
+This started to run through the required parameters for an `aws_instance`
+resource but stopped short at the `user_data` parameter since that will be
+covered in the next section.
+
