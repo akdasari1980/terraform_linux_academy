@@ -659,3 +659,16 @@ Gateway resource and two route tables.  The `variables.tf` file does have a
 default value for the private subnet specified within the module.
 
 This will likely be removed in the subsequent sections.
+
+## Networking Part 2: Subnets, Security, and Count
+
+This lesson introduced `count` for a resource metaparameter.  More info about
+it and other metaparameters may be found here:
+https://www.terraform.io/docs/configuration/resources.html
+
+The following resources were introduced here:
+
+- aws_subnet
+- aws_route_table_association
+- aws_security_group
+
