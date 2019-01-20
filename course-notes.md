@@ -635,3 +635,12 @@ folder.  Here's the file and folder hierarchy:
 
 The `userdata.tpl` file in the `compute` folder is a template file we'll learn
 to utilize later on.
+
+## Storage Part 1: The S3 Bucket and Random ID
+
+Since these later sections are assuming work will be happening on Cloud9, the
+notes will likely be added as comments into the `.tf` files themselves.
+
+For this section, the `storage` module was started and introduced some new
+resources.  Direct links to the documentation for those resources have been
+added to the module's source code via comments.
