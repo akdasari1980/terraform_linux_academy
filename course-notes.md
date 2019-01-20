@@ -672,3 +672,12 @@ The following resources were introduced here:
 - aws_route_table_association
 - aws_security_group
 
+## Networking Part 3: The Root Module
+
+Much like the `storage` module section's integration into the root module, this
+is binding the `networking` module to the root.
+
+One gotcha during the cutover was to specify that the variable type, in this
+case for `public_cidrs`, needs to have a type of `list` specified so that
+it can have the appropriate input passed through to the `networking` module.
+
